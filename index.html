@@ -860,6 +860,128 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+/* ===== FULL MENU MODAL ===== */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 500;
+}
+.menu-overlay.open { display: block; }
+
+.menu-modal {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1340px;
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 30px 36px 36px;
+  animation: modalDown 0.18s ease;
+}
+@keyframes modalDown {
+  from { opacity:0; transform: translateX(-50%) translateY(-10px); }
+  to   { opacity:1; transform: translateX(-50%) translateY(0); }
+}
+
+.menu-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+.menu-modal-header .menu-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #333;
+}
+.menu-modal-header .menu-login-link {
+  font-size: 14px;
+  color: #2db4a8;
+  font-weight: 600;
+  cursor: pointer;
+}
+.menu-modal-header .menu-login-link:hover { text-decoration: underline; }
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.menu-category {
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 18px 18px 20px;
+}
+.menu-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.menu-cat-header i {
+  font-size: 18px;
+  color: #2db4a8;
+}
+.menu-cat-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+.menu-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+}
+.menu-links a {
+  font-size: 13px;
+  color: #555;
+  padding: 3px 0;
+  display: block;
+}
+.menu-links a:hover { color: #2db4a8; }
+.menu-links a.full-width {
+  grid-column: 1 / -1;
+}
+
+.menu-bottom {
+  background: #f0faf9;
+  border-radius: 10px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.menu-contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.menu-contact i { font-size: 20px; color: #2db4a8; }
+.menu-contact .contact-label { font-size: 13px; color: #888; }
+.menu-contact .contact-number {
+  font-size: 18px;
+  font-weight: 800;
+  color: #2db4a8;
+}
+
+/* Active hamburger styling */
+.nav-hamburger.active {
+  background: #e8f7f5;
+  border-color: #2db4a8;
+}
+.nav-hamburger.active i { color: #2db4a8; }
 </style>
 </head>
 <body>
@@ -882,7 +1004,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 
 <!-- ICON NAVIGATION -->
 <nav class="icon-nav">
-  <div class="nav-hamburger">
+  <div class="nav-hamburger" id="menuBtn" onclick="toggleMenu()">
     <i class="fas fa-bars"></i>
   </div>
   <div class="icon-nav-item">
@@ -1193,6 +1315,182 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 <div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <i class="fas fa-chevron-up"></i>
 </div>
+
+<!-- FULL MENU MODAL OVERLAY -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()">
+  <div class="menu-modal" onclick="event.stopPropagation()">
+    <div class="menu-modal-header">
+      <span class="menu-title">전체메뉴보기</span>
+      <span class="menu-login-link">로그인해주세요 &rsaquo;</span>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- 대학/학과/전형 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-edit"></i>
+          <span class="menu-cat-title">대학/학과/전형</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">대학정보</a>
+          <a href="#">학과정보</a>
+          <a href="#">전형정보</a>
+          <a href="#">지역별검색</a>
+          <a href="#">경쟁률현황</a>
+          <a href="#">합격자현황</a>
+        </div>
+      </div>
+
+      <!-- 자격요건 분석 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-passport"></i>
+          <span class="menu-cat-title">자격요건 분석</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">재외국민 자격확인</a>
+          <a href="#">해외체류기간 계산</a>
+          <a href="#">학력인정 기준</a>
+          <a href="#">특례유형 안내</a>
+          <a href="#" class="full-width">자격요건 상세안내</a>
+        </div>
+      </div>
+
+      <!-- 입시상담 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-comments"></i>
+          <span class="menu-cat-title">입시상담</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">온라인입시상담</a>
+          <a href="#">상담FAQ</a>
+          <a href="#">전화상담 안내</a>
+          <a href="#">1:1 맞춤상담</a>
+          <a href="#" class="full-width">재외국민 종합상담</a>
+        </div>
+      </div>
+
+      <!-- 진로정보 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-route"></i>
+          <span class="menu-cat-title">진로정보</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">직업정보</a>
+          <a href="#">직업심리검사</a>
+          <a href="#">학과별 진로안내</a>
+          <a href="#">해외 취업정보</a>
+        </div>
+      </div>
+
+      <!-- 입시정보센터 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-database"></i>
+          <span class="menu-cat-title">입시정보센터</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">재외국민제도안내</a>
+          <a href="#">전형일정</a>
+          <a href="#">입시소식</a>
+          <a href="#">설명회/박람회</a>
+          <a href="#">입시자료실</a>
+          <a href="#">대학별 입시정보</a>
+        </div>
+      </div>
+
+      <!-- 고객센터 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-headset"></i>
+          <span class="menu-cat-title">고객센터</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">공지사항</a>
+          <a href="#">서비스이용문의</a>
+          <a href="#">사이트맵</a>
+          <a href="#">이용안내</a>
+        </div>
+      </div>
+
+      <!-- 회원서비스 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-users"></i>
+          <span class="menu-cat-title">회원서비스</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">로그인</a>
+          <a href="#">회원가입</a>
+          <a href="#">아이디찾기</a>
+          <a href="#">비밀번호찾기</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">이메일수집거부</a>
+        </div>
+      </div>
+
+      <!-- 마이페이지 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-user-circle"></i>
+          <span class="menu-cat-title">마이페이지</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">관심대학/전형</a>
+          <a href="#">어디가 알림</a>
+          <a href="#">일정관리</a>
+          <a href="#">신청/접수</a>
+          <a href="#">재외국민 지원정보</a>
+          <a href="#">입학도우미</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 하단 연락처 -->
+    <div class="menu-bottom">
+      <div class="menu-contact">
+        <i class="fas fa-phone-alt"></i>
+        <div>
+          <div class="contact-label">입시상담전화</div>
+          <div class="contact-number">1600-1615</div>
+        </div>
+      </div>
+      <div class="menu-contact">
+        <i class="fas fa-phone"></i>
+        <div>
+          <div class="contact-label">기타문의</div>
+          <div class="contact-number">02-6919-3960</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleMenu() {
+  const overlay = document.getElementById('menuOverlay');
+  const btn = document.getElementById('menuBtn');
+  const isOpen = overlay.classList.contains('open');
+  if (isOpen) {
+    overlay.classList.remove('open');
+    btn.classList.remove('active');
+  } else {
+    overlay.classList.add('open');
+    btn.classList.add('active');
+  }
+}
+function closeMenu() {
+  document.getElementById('menuOverlay').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeMenu();
+});
+</script>
 
 </body>
 </html>
