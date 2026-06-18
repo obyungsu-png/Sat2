@@ -783,61 +783,71 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   margin-top: 30px;
 }
 .footer-links {
-  padding: 18px 40px;
+  padding: 16px 40px;
   display: flex;
-  gap: 28px;
+  gap: 32px;
   border-bottom: 1px solid #eee;
   font-size: 13px;
   color: #555;
   align-items: center;
 }
-.footer-links a:first-child { font-weight: 700; }
+.footer-links a { color: #555; white-space: nowrap; }
+.footer-links a:first-child { font-weight: 700; color: #333; }
 .footer-links a:hover { color: #2db4a8; }
 .footer-selects {
   margin-left: auto;
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 .footer-selects select {
-  padding: 6px 30px 6px 12px;
-  border: 1px solid #ddd;
+  padding: 6px 24px 6px 12px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 13px;
   font-family: 'Noto Sans KR', sans-serif;
-  color: #666;
+  color: #555;
+  background: #fff;
   appearance: auto;
+  min-width: 110px;
 }
 .footer-body {
-  padding: 25px 40px 30px;
+  padding: 28px 40px 32px;
   display: flex;
-  gap: 80px;
+  gap: 0;
 }
 .footer-org {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   align-items: flex-start;
   flex: 1;
+  padding-right: 40px;
+}
+.footer-org + .footer-org {
+  padding-right: 0;
+  padding-left: 40px;
+  border-left: 1px solid #eee;
 }
 .footer-org-logo {
-  width: 70px;
-  height: 70px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: #f0f0f0;
+  border: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
-.footer-org-logo i { font-size: 28px; color: #aaa; }
+.footer-org-logo i { font-size: 22px; color: #bbb; }
 .footer-org-info {
   font-size: 12px;
-  color: #999;
-  line-height: 1.7;
+  color: #aaa;
+  line-height: 1.8;
 }
 .footer-org-info .org-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #666;
+  font-size: 15px;
+  font-weight: 700;
+  color: #444;
   margin-bottom: 4px;
 }
 
