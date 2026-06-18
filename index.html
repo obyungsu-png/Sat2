@@ -1058,7 +1058,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 </nav>
 
 <!-- MAIN CONTENT -->
-<div class="main-wrap">
+<div class="main-wrap" id="mainWrap">
 
   <!-- BANNER ROW -->
   <div class="banner-row">
@@ -1488,18 +1488,8 @@ function closeMenu() {
   document.getElementById('menuBtn').classList.remove('active');
 }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeMenu(); closeJobModal(); }
+  if (e.key === 'Escape') { closeMenu(); }
 });
-
-/* ---- 직업정보 모달 ---- */
-function openJobModal() {
-  document.getElementById('jobOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeJobModal() {
-  document.getElementById('jobOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
 
 /* 아코디언 토글 */
 function toggleAccordion(el) {
@@ -1553,19 +1543,16 @@ function searchJobs() {
 <style>
 .job-overlay {
   display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  z-index: 600;
-  overflow-y: auto;
+  background: #f4f7f9;
+  min-height: calc(100vh - 180px);
 }
 .job-overlay.open { display: block; }
 
 .job-modal {
   background: #f4f7f9;
-  min-height: 100vh;
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: calc(100vh - 180px);
+  max-width: 100%;
+  margin: 0;
   padding: 0 0 60px;
 }
 
@@ -1584,14 +1571,17 @@ function searchJobs() {
 .job-modal-topbar a:hover { color: #2db4a8; }
 .job-modal-close-btn {
   margin-left: auto;
-  background: none;
-  border: none;
-  font-size: 22px;
-  color: #888;
+  background: #fff;
+  border: 1px solid #2db4a8;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2db4a8;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 5px 14px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
-.job-modal-close-btn:hover { color: #333; }
+.job-modal-close-btn:hover { background: #2db4a8; color: #fff; }
 
 .job-modal-hero {
   background: #fff;
@@ -1743,16 +1733,16 @@ function searchJobs() {
 .job-tag:hover { background: #2db4a8; color: #fff; border-color: #2db4a8; }
 </style>
 
-<div class="job-overlay" id="jobOverlay" onclick="if(event.target===this)closeJobModal()">
+<div class="job-overlay" id="jobOverlay">
   <div class="job-modal">
 
     <div class="job-modal-topbar">
-      <i class="fas fa-home"></i>
+      <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
       <span class="breadcrumb-sep">›</span>
-      <a href="#">진로정보</a>
+      <a href="#" onclick="showHome()">진로정보</a>
       <span class="breadcrumb-sep">›</span>
       <strong style="color:#333;">직업정보</strong>
-      <button class="job-modal-close-btn" onclick="closeJobModal()"><i class="fas fa-times"></i></button>
+      <button class="job-modal-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
     </div>
 
     <div class="job-modal-hero">
@@ -1939,11 +1929,8 @@ function searchJobs() {
 /* 공통 full-page 오버레이 */
 .info-overlay {
   display: none;
-  position: fixed;
-  inset: 0;
   background: #f4f7f9;
-  z-index: 700;
-  overflow-y: auto;
+  min-height: calc(100vh - 180px);
 }
 .info-overlay.open { display: block; }
 
@@ -1957,9 +1944,6 @@ function searchJobs() {
   font-size: 13px;
   color: #888;
   border-bottom: 1px solid #d0ecea;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 .info-topbar a { color: #888; }
 .info-topbar a:hover { color: #2db4a8; }
@@ -1967,13 +1951,17 @@ function searchJobs() {
 .info-topbar .bc-cur { font-weight: 700; color: #333; }
 .info-close-btn {
   margin-left: auto;
-  background: none;
-  border: none;
-  font-size: 22px;
-  color: #888;
+  background: #fff;
+  border: 1px solid #2db4a8;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2db4a8;
   cursor: pointer;
+  padding: 5px 14px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
-.info-close-btn:hover { color: #333; }
+.info-close-btn:hover { background: #2db4a8; color: #fff; }
 
 /* hero */
 .info-hero {
@@ -2281,13 +2269,13 @@ function searchJobs() {
 </style>
 
 <!-- ===== 대학정보 모달 ===== -->
-<div class="info-overlay" id="univOverlay" onclick="if(event.target===this)closeUnivModal()">
+<div class="info-overlay" id="univOverlay">
   <div class="info-topbar">
-    <i class="fas fa-home"></i>
-    <span class="bc-sep">›</span><a href="#">대학/학과/전형</a>
+    <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#" onclick="showHome()">대학/학과/전형</a>
     <span class="bc-sep">›</span><a href="#">대학정보</a>
     <span class="bc-sep">›</span><span class="bc-cur">일반대학</span>
-    <button class="info-close-btn" onclick="closeUnivModal()"><i class="fas fa-times"></i></button>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
   <div class="info-hero"><h1>대학정보</h1></div>
 
@@ -2347,13 +2335,13 @@ function searchJobs() {
 </div>
 
 <!-- ===== 학과정보 모달 ===== -->
-<div class="info-overlay" id="deptOverlay" onclick="if(event.target===this)closeDeptModal()">
+<div class="info-overlay" id="deptOverlay">
   <div class="info-topbar">
-    <i class="fas fa-home"></i>
-    <span class="bc-sep">›</span><a href="#">대학/학과/전형</a>
+    <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#" onclick="showHome()">대학/학과/전형</a>
     <span class="bc-sep">›</span><a href="#">학과정보</a>
     <span class="bc-sep">›</span><span class="bc-cur">일반대학</span>
-    <button class="info-close-btn" onclick="closeDeptModal()"><i class="fas fa-times"></i></button>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
   <div class="info-hero"><h1>학과정보</h1></div>
 
@@ -2520,29 +2508,47 @@ function renderPagination(containerId, current, total, callback) {
   c.innerHTML = html;
 }
 
-/* ====== 모달 open/close ====== */
-function openUnivModal() {
-  document.getElementById('univOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-  renderUnivTable(1);
-}
-function closeUnivModal() {
-  document.getElementById('univOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-function openDeptModal() {
-  document.getElementById('deptOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-  renderDeptTable(1);
-}
-function closeDeptModal() {
-  document.getElementById('deptOverlay').classList.remove('open');
-  document.body.style.overflow='';
+/* ====== 페이지 전환 헬퍼 ====== */
+const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay'];
+
+function showPage(id) {
+  // 메인 콘텐츠 숨기기
+  document.getElementById('mainWrap').style.display = 'none';
+  // 모든 페이지 숨기기
+  ALL_PAGES.forEach(p => document.getElementById(p).classList.remove('open'));
+  // 해당 페이지 열기
+  document.getElementById(id).classList.add('open');
+  // 맨 위로 스크롤
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-/* ESC 닫기 */
+function showHome() {
+  ALL_PAGES.forEach(p => document.getElementById(p).classList.remove('open'));
+  document.getElementById('mainWrap').style.display = '';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* ====== 대학정보 / 학과정보 / 직업정보 ====== */
+function openUnivModal() {
+  showPage('univOverlay');
+  renderUnivTable(1);
+}
+function closeUnivModal() { showHome(); }
+
+function openDeptModal() {
+  showPage('deptOverlay');
+  renderDeptTable(1);
+}
+function closeDeptModal() { showHome(); }
+
+function openJobModal() {
+  showPage('jobOverlay');
+}
+function closeJobModal() { showHome(); }
+
+/* ESC → 홈으로 */
 document.addEventListener('keydown', function(e){
-  if(e.key==='Escape'){ closeUnivModal(); closeDeptModal(); closeJobModal(); closeMenu(); }
+  if(e.key==='Escape'){ showHome(); closeMenu(); }
 });
 </script>
 
