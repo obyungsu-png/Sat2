@@ -9,7 +9,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Noto Sans KR', sans-serif; background: #f5f5f5; color: #333; }
+body { font-family: 'Noto Sans KR', sans-serif; background: #f5f5f5; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+.page-content { flex: 1; }
 a { text-decoration: none; color: inherit; cursor: pointer; }
 
 /* ===== TOP HEADER ===== */
@@ -125,7 +126,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 .main-wrap {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 25px 80px 25px 40px;
+  padding: 25px 80px 40px 40px;
 }
 
 /* Banner + Login Row */
@@ -782,7 +783,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 .footer {
   background: #fff;
   border-top: 1px solid #e0e0e0;
-  margin-top: 30px;
+  margin-top: 0;
 }
 .footer-links {
   padding: 16px 40px;
@@ -999,6 +1000,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 <body>
 
 <!-- TOP HEADER -->
+<div class="page-content">
 <header class="top-header">
   <div class="logo">J-<span>Way</span></div>
   <div class="search-box">
@@ -1288,284 +1290,21 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   <div class="side-float-btn">서류준비<br>가이드</div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-links">
-    <a href="#">개인정보처리방침</a>
-    <a href="#">이용약관</a>
-    <a href="#">이메일주소 무단수집 거부</a>
-    <a href="#">저작권정책</a>
-    <a href="#">제안 및 건의하기</a>
-    <div class="footer-selects">
-      <select><option>관련기관</option></select>
-      <select><option>Family Site</option></select>
-    </div>
-  </div>
-  <div class="footer-body">
-    <div class="footer-org">
-      <div class="footer-org-logo"><i class="fas fa-building"></i></div>
-      <div class="footer-org-info">
-        <div class="org-name">한국대학교육협의회</div>
-        (우)08504 서울특별시 금천구 서부샛길 606<br>
-        (가산동, 대성디폴리스 A동, 22~23층) 전화문의 : 02-6919-3960<br>
-        Copyright2023. KCUE all rights reserved
-      </div>
-    </div>
-    <div class="footer-org">
-      <div class="footer-org-logo"><i class="fas fa-landmark"></i></div>
-      <div class="footer-org-info">
-        <div class="org-name">한국전문대학교육협의회</div>
-        (우)04505 서울특별시 중구 서소문로 38 (중림동 센트럴타워 7층)<br>
-        TEL : 02-3145-1200 | FAX : 02-364-1584<br>
-        Copyright2023. KCUE all rights reserved
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- SCROLL TOP -->
-<div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fas fa-chevron-up"></i>
-</div>
-
-<!-- FULL MENU MODAL OVERLAY -->
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()">
-  <div class="menu-modal" onclick="event.stopPropagation()">
-    <div class="menu-modal-header">
-      <span class="menu-title">전체메뉴보기</span>
-      <span class="menu-login-link">로그인해주세요 &rsaquo;</span>
-    </div>
-
-    <div class="menu-grid">
-
-      <!-- 대학/학과/전형 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-edit"></i>
-          <span class="menu-cat-title">대학/학과/전형</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">대학정보</a>
-          <a href="#">학과정보</a>
-          <a href="#">전형정보</a>
-          <a href="#">지역별검색</a>
-          <a href="#">경쟁률현황</a>
-          <a href="#">합격자현황</a>
-        </div>
-      </div>
-
-      <!-- 자격요건 분석 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-passport"></i>
-          <span class="menu-cat-title">자격요건 분석</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">재외국민 자격확인</a>
-          <a href="#">해외체류기간 계산</a>
-          <a href="#">학력인정 기준</a>
-          <a href="#">특례유형 안내</a>
-          <a href="#" class="full-width">자격요건 상세안내</a>
-        </div>
-      </div>
-
-      <!-- 입시상담 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-comments"></i>
-          <span class="menu-cat-title">입시상담</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">온라인입시상담</a>
-          <a href="#">상담FAQ</a>
-          <a href="#">전화상담 안내</a>
-          <a href="#">1:1 맞춤상담</a>
-          <a href="#" class="full-width">재외국민 종합상담</a>
-        </div>
-      </div>
-
-      <!-- 진로정보 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-route"></i>
-          <span class="menu-cat-title">진로정보</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">직업정보</a>
-          <a href="#">직업심리검사</a>
-          <a href="#">학과별 진로안내</a>
-          <a href="#">해외 취업정보</a>
-        </div>
-      </div>
-
-      <!-- 입시정보센터 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-database"></i>
-          <span class="menu-cat-title">입시정보센터</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">재외국민제도안내</a>
-          <a href="#">전형일정</a>
-          <a href="#">입시소식</a>
-          <a href="#">설명회/박람회</a>
-          <a href="#">입시자료실</a>
-          <a href="#">대학별 입시정보</a>
-        </div>
-      </div>
-
-      <!-- 고객센터 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-headset"></i>
-          <span class="menu-cat-title">고객센터</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">공지사항</a>
-          <a href="#">서비스이용문의</a>
-          <a href="#">사이트맵</a>
-          <a href="#">이용안내</a>
-        </div>
-      </div>
-
-      <!-- 회원서비스 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-users"></i>
-          <span class="menu-cat-title">회원서비스</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">로그인</a>
-          <a href="#">회원가입</a>
-          <a href="#">아이디찾기</a>
-          <a href="#">비밀번호찾기</a>
-          <a href="#">개인정보처리방침</a>
-          <a href="#">이메일수집거부</a>
-        </div>
-      </div>
-
-      <!-- 마이페이지 -->
-      <div class="menu-category">
-        <div class="menu-cat-header">
-          <i class="fas fa-user-circle"></i>
-          <span class="menu-cat-title">마이페이지</span>
-        </div>
-        <div class="menu-links">
-          <a href="#">관심대학/전형</a>
-          <a href="#">어디가 알림</a>
-          <a href="#">일정관리</a>
-          <a href="#">신청/접수</a>
-          <a href="#">재외국민 지원정보</a>
-          <a href="#">입학도우미</a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 하단 연락처 -->
-    <div class="menu-bottom">
-      <div class="menu-contact">
-        <i class="fas fa-phone-alt"></i>
-        <div>
-          <div class="contact-label">입시상담전화</div>
-          <div class="contact-number">1600-1615</div>
-        </div>
-      </div>
-      <div class="menu-contact">
-        <i class="fas fa-phone"></i>
-        <div>
-          <div class="contact-label">기타문의</div>
-          <div class="contact-number">02-6919-3960</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-function toggleMenu() {
-  const overlay = document.getElementById('menuOverlay');
-  const btn = document.getElementById('menuBtn');
-  const isOpen = overlay.classList.contains('open');
-  if (isOpen) {
-    overlay.classList.remove('open');
-    btn.classList.remove('active');
-  } else {
-    overlay.classList.add('open');
-    btn.classList.add('active');
-  }
-}
-function closeMenu() {
-  document.getElementById('menuOverlay').classList.remove('open');
-  document.getElementById('menuBtn').classList.remove('active');
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeMenu(); }
-});
-
-/* 아코디언 토글 */
-function toggleAccordion(el) {
-  const item = el.closest('.job-acc-item');
-  const body = item.querySelector('.job-acc-body');
-  const icon = item.querySelector('.acc-icon');
-  const isOpen = item.classList.contains('open');
-  // 모두 닫기
-  document.querySelectorAll('.job-acc-item.open').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.job-acc-body').style.maxHeight = '0';
-    i.querySelector('.acc-icon').style.transform = '';
-  });
-  if (!isOpen) {
-    item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
-    icon.style.transform = 'rotate(180deg)';
-  }
-}
-
-/* 검색 필터 */
-function searchJobs() {
-  const keyword = document.getElementById('jobSearchInput').value.trim().toLowerCase();
-  const salary = document.getElementById('salaryFilter').value;
-  const outlook = document.getElementById('outlookFilter').value;
-
-  document.querySelectorAll('.job-acc-item').forEach(item => {
-    const jobs = item.querySelectorAll('.job-tag');
-    let catVisible = false;
-    jobs.forEach(tag => {
-      const name = tag.textContent.toLowerCase();
-      const matchKw = !keyword || name.includes(keyword);
-      const matchSal = !salary; // 간단 구현: 선택값 있으면 모두 표시
-      const matchOut = !outlook;
-      if (matchKw && matchSal && matchOut) {
-        tag.style.display = '';
-        catVisible = true;
-      } else if (keyword) {
-        tag.style.display = 'none';
-      } else {
-        tag.style.display = '';
-        catVisible = true;
-      }
-    });
-    item.style.display = catVisible ? '' : 'none';
-  });
-}
-</script>
 
 <!-- 직업정보 모달 -->
 <style>
 .job-overlay {
   display: none;
   background: #f4f7f9;
-  min-height: calc(100vh - 180px);
+  padding-bottom: 40px;
 }
 .job-overlay.open { display: block; }
 
 .job-modal {
   background: #f4f7f9;
-  min-height: calc(100vh - 180px);
   max-width: 100%;
   margin: 0;
-  padding: 0 0 60px;
+  padding: 0;
 }
 
 .job-modal-topbar {
@@ -1942,7 +1681,7 @@ function searchJobs() {
 .info-overlay {
   display: none;
   background: #f4f7f9;
-  min-height: calc(100vh - 180px);
+  padding-bottom: 40px;
 }
 .info-overlay.open { display: block; }
 
@@ -2416,6 +2155,271 @@ function searchJobs() {
     </div>
   </div>
 </div>
+
+<!-- FOOTER -->
+</div><!-- /page-content -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">개인정보처리방침</a>
+    <a href="#">이용약관</a>
+    <a href="#">이메일주소 무단수집 거부</a>
+    <a href="#">저작권정책</a>
+    <a href="#">제안 및 건의하기</a>
+    <div class="footer-selects">
+      <select><option>관련기관</option></select>
+      <select><option>Family Site</option></select>
+    </div>
+  </div>
+  <div class="footer-body">
+    <div class="footer-org">
+      <div class="footer-org-logo"><i class="fas fa-building"></i></div>
+      <div class="footer-org-info">
+        <div class="org-name">한국대학교육협의회</div>
+        (우)08504 서울특별시 금천구 서부샛길 606<br>
+        (가산동, 대성디폴리스 A동, 22~23층) 전화문의 : 02-6919-3960<br>
+        Copyright2023. KCUE all rights reserved
+      </div>
+    </div>
+    <div class="footer-org">
+      <div class="footer-org-logo"><i class="fas fa-landmark"></i></div>
+      <div class="footer-org-info">
+        <div class="org-name">한국전문대학교육협의회</div>
+        (우)04505 서울특별시 중구 서소문로 38 (중림동 센트럴타워 7층)<br>
+        TEL : 02-3145-1200 | FAX : 02-364-1584<br>
+        Copyright2023. KCUE all rights reserved
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-chevron-up"></i>
+</div>
+
+<!-- FULL MENU MODAL OVERLAY -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()">
+  <div class="menu-modal" onclick="event.stopPropagation()">
+    <div class="menu-modal-header">
+      <span class="menu-title">전체메뉴보기</span>
+      <span class="menu-login-link">로그인해주세요 &rsaquo;</span>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- 대학/학과/전형 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-edit"></i>
+          <span class="menu-cat-title">대학/학과/전형</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">대학정보</a>
+          <a href="#">학과정보</a>
+          <a href="#">전형정보</a>
+          <a href="#">지역별검색</a>
+          <a href="#">경쟁률현황</a>
+          <a href="#">합격자현황</a>
+        </div>
+      </div>
+
+      <!-- 자격요건 분석 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-passport"></i>
+          <span class="menu-cat-title">자격요건 분석</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">재외국민 자격확인</a>
+          <a href="#">해외체류기간 계산</a>
+          <a href="#">학력인정 기준</a>
+          <a href="#">특례유형 안내</a>
+          <a href="#" class="full-width">자격요건 상세안내</a>
+        </div>
+      </div>
+
+      <!-- 입시상담 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-comments"></i>
+          <span class="menu-cat-title">입시상담</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">온라인입시상담</a>
+          <a href="#">상담FAQ</a>
+          <a href="#">전화상담 안내</a>
+          <a href="#">1:1 맞춤상담</a>
+          <a href="#" class="full-width">재외국민 종합상담</a>
+        </div>
+      </div>
+
+      <!-- 진로정보 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-route"></i>
+          <span class="menu-cat-title">진로정보</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">직업정보</a>
+          <a href="#">직업심리검사</a>
+          <a href="#">학과별 진로안내</a>
+          <a href="#">해외 취업정보</a>
+        </div>
+      </div>
+
+      <!-- 입시정보센터 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-database"></i>
+          <span class="menu-cat-title">입시정보센터</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">재외국민제도안내</a>
+          <a href="#">전형일정</a>
+          <a href="#">입시소식</a>
+          <a href="#">설명회/박람회</a>
+          <a href="#">입시자료실</a>
+          <a href="#">대학별 입시정보</a>
+        </div>
+      </div>
+
+      <!-- 고객센터 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-headset"></i>
+          <span class="menu-cat-title">고객센터</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">공지사항</a>
+          <a href="#">서비스이용문의</a>
+          <a href="#">사이트맵</a>
+          <a href="#">이용안내</a>
+        </div>
+      </div>
+
+      <!-- 회원서비스 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-users"></i>
+          <span class="menu-cat-title">회원서비스</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">로그인</a>
+          <a href="#">회원가입</a>
+          <a href="#">아이디찾기</a>
+          <a href="#">비밀번호찾기</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">이메일수집거부</a>
+        </div>
+      </div>
+
+      <!-- 마이페이지 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-user-circle"></i>
+          <span class="menu-cat-title">마이페이지</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">관심대학/전형</a>
+          <a href="#">어디가 알림</a>
+          <a href="#">일정관리</a>
+          <a href="#">신청/접수</a>
+          <a href="#">재외국민 지원정보</a>
+          <a href="#">입학도우미</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 하단 연락처 -->
+    <div class="menu-bottom">
+      <div class="menu-contact">
+        <i class="fas fa-phone-alt"></i>
+        <div>
+          <div class="contact-label">입시상담전화</div>
+          <div class="contact-number">1600-1615</div>
+        </div>
+      </div>
+      <div class="menu-contact">
+        <i class="fas fa-phone"></i>
+        <div>
+          <div class="contact-label">기타문의</div>
+          <div class="contact-number">02-6919-3960</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleMenu() {
+  const overlay = document.getElementById('menuOverlay');
+  const btn = document.getElementById('menuBtn');
+  const isOpen = overlay.classList.contains('open');
+  if (isOpen) {
+    overlay.classList.remove('open');
+    btn.classList.remove('active');
+  } else {
+    overlay.classList.add('open');
+    btn.classList.add('active');
+  }
+}
+function closeMenu() {
+  document.getElementById('menuOverlay').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeMenu(); }
+});
+
+/* 아코디언 토글 */
+function toggleAccordion(el) {
+  const item = el.closest('.job-acc-item');
+  const body = item.querySelector('.job-acc-body');
+  const icon = item.querySelector('.acc-icon');
+  const isOpen = item.classList.contains('open');
+  // 모두 닫기
+  document.querySelectorAll('.job-acc-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.job-acc-body').style.maxHeight = '0';
+    i.querySelector('.acc-icon').style.transform = '';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+
+/* 검색 필터 */
+function searchJobs() {
+  const keyword = document.getElementById('jobSearchInput').value.trim().toLowerCase();
+  const salary = document.getElementById('salaryFilter').value;
+  const outlook = document.getElementById('outlookFilter').value;
+
+  document.querySelectorAll('.job-acc-item').forEach(item => {
+    const jobs = item.querySelectorAll('.job-tag');
+    let catVisible = false;
+    jobs.forEach(tag => {
+      const name = tag.textContent.toLowerCase();
+      const matchKw = !keyword || name.includes(keyword);
+      const matchSal = !salary; // 간단 구현: 선택값 있으면 모두 표시
+      const matchOut = !outlook;
+      if (matchKw && matchSal && matchOut) {
+        tag.style.display = '';
+        catVisible = true;
+      } else if (keyword) {
+        tag.style.display = 'none';
+      } else {
+        tag.style.display = '';
+        catVisible = true;
+      }
+    });
+    item.style.display = catVisible ? '' : 'none';
+  });
+}
+</script>
+
 
 <script>
 /* ====== 대학 데이터 ====== */
