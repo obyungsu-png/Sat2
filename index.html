@@ -1286,8 +1286,8 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 <!-- FLOATING SIDE BUTTONS -->
 <div class="side-floating">
   <div class="side-float-btn" onclick="openGuideModal()">자격요건<br>가이드</div>
-  <div class="side-float-btn">초보자<br>가이드</div>
-  <div class="side-float-btn">표준공통<br>원점수<br>가이드</div>
+  <div class="side-float-btn" onclick="openNoviceGuide()">초보자<br>가이드</div>
+  <div class="side-float-btn" onclick="window.open('https://www.youtube.com/results?search_query=재외국민+전형+TV','_blank')">표준공통<br>원점수<br>가이드</div>
   <div class="side-float-btn">서류준비<br>가이드</div>
 </div>
 
@@ -3106,6 +3106,293 @@ function switchGuideTab(btn, idx) {
     '서류 HTML 입력 가이드'
   ];
   document.querySelector('#guideContent h2').textContent = titles[idx];
+}
+</script>
+
+
+<!-- ===== 초보자 가이드 모달 ===== -->
+<style>
+.novice-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 900;
+  overflow-y: auto;
+  padding: 30px 20px;
+}
+.novice-modal-overlay.open { display: block; }
+.novice-modal-box {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #f0faf9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.novice-modal-header {
+  background: #2db4a8;
+  color: #fff;
+  padding: 20px 30px;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  position: relative;
+}
+.novice-modal-close {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+.novice-top-tabs {
+  padding: 22px 30px 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.novice-tab {
+  padding: 12px 6px;
+  border: 1px solid #d8e8e6;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.15s;
+}
+.novice-tab:hover { border-color: #2db4a8; color: #2db4a8; }
+.novice-tab.active { border-color: #2db4a8; background: #2db4a8; color: #fff; }
+
+.novice-intro {
+  margin: 22px 30px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.novice-intro-icon {
+  width: 50px; height: 50px;
+  border-radius: 10px;
+  background: #e8f5f4;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  color: #2db4a8;
+  flex-shrink: 0;
+}
+.novice-intro-text {
+  font-size: 16px;
+  font-weight: 800;
+  color: #222;
+}
+.novice-intro-text strong { color: #2db4a8; }
+.novice-intro-text .sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: #666;
+  margin-top: 4px;
+}
+
+.novice-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 0 30px;
+}
+.novice-step-card {
+  border-radius: 12px;
+  padding: 24px 20px;
+  background: #fff;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+.novice-step-card.active {
+  border-color: #2db4a8;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(45,180,168,0.15);
+}
+.novice-step-card:not(.active) {
+  background: #6e6e6e;
+  color: #fff;
+}
+.novice-step-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+  color: #2db4a8;
+}
+.novice-step-card:not(.active) .novice-step-icon { color: #fff; }
+.novice-step-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.novice-step-card:not(.active) .novice-step-title {
+  border-bottom-color: rgba(255,255,255,0.3);
+}
+.novice-step-title strong { color: #2db4a8; }
+.novice-step-card:not(.active) .novice-step-title strong { color: #fff; }
+.novice-step-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #555;
+}
+.novice-step-card:not(.active) .novice-step-desc { color: #fff; }
+
+.novice-detail {
+  margin: 24px 30px 30px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 26px 30px;
+}
+.novice-detail-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #222;
+}
+.novice-detail-title .magnifier {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #e8f5f4;
+  display: flex; align-items: center; justify-content: center;
+  color: #2db4a8;
+  font-size: 14px;
+}
+.novice-detail-title strong { color: #2db4a8; }
+
+.novice-detail-list { display: flex; flex-direction: column; gap: 16px; }
+.novice-detail-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.novice-detail-tag {
+  background: #2db4a8;
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.novice-detail-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+}
+.novice-detail-desc strong { font-weight: 700; color: #333; }
+</style>
+
+<div class="novice-modal-overlay" id="noviceModalOverlay" onclick="if(event.target===this)closeNoviceGuide()">
+  <div class="novice-modal-box">
+    <div class="novice-modal-header">
+      재외국민 초보자 가이드
+      <button class="novice-modal-close" onclick="closeNoviceGuide()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="novice-top-tabs">
+      <button class="novice-tab active">회원가입 및 로그인</button>
+      <button class="novice-tab">자격요건 확인</button>
+      <button class="novice-tab">대학/학과 검색</button>
+      <button class="novice-tab">서류준비 안내</button>
+      <button class="novice-tab">대입상담</button>
+      <button class="novice-tab">입학도우미</button>
+    </div>
+
+    <div class="novice-intro">
+      <div class="novice-intro-icon"><i class="fas fa-book-reader"></i></div>
+      <div class="novice-intro-text">
+        재외국민 One Stop 서비스 <strong>제대로 활용하기!</strong>
+        <div class="sub">올바른 재외국민 입시정보는 검색·진단·상담을 통해 더 정확한 정보를 확인할 수 있습니다.</div>
+      </div>
+    </div>
+
+    <div class="novice-steps">
+      <div class="novice-step-card active">
+        <div class="novice-step-icon"><i class="fas fa-search"></i></div>
+        <div class="novice-step-title"><strong>1단계</strong> 재외국민 정보 검색</div>
+        <div class="novice-step-desc">
+          해외체류기간과 학력사항을 입력해 본인의 재외국민 자격요건을 확인하고, 자격에 맞는 대학·학과·전형을 검색합니다.
+        </div>
+      </div>
+      <div class="novice-step-card">
+        <div class="novice-step-icon"><i class="fas fa-clipboard-check"></i></div>
+        <div class="novice-step-title"><strong>2단계</strong> 자격 진단</div>
+        <div class="novice-step-desc">
+          학생부 성적과 모의고사 성적을 입력하여 본인에게 유리한 전형과 성적조합을 분석하고, 원하는 대학·학과의 전년도 입시결과와 환산점수를 확인합니다.
+        </div>
+      </div>
+      <div class="novice-step-card">
+        <div class="novice-step-icon"><i class="fas fa-comments"></i></div>
+        <div class="novice-step-title"><strong>3단계</strong> 대입상담</div>
+        <div class="novice-step-desc">
+          학교 내 진학상담 또는 한국대학교육협의회 대입상담센터 전화상담(1600-1615), 재외국민 One Stop 서비스의 온라인상담 등 다양한 방법을 통해 진단결과를 상담받을 수 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="novice-detail">
+      <div class="novice-detail-title">
+        <span class="magnifier"><i class="fas fa-search"></i></span>
+        <strong>1단계</strong> 재외국민 정보 검색
+      </div>
+      <div class="novice-detail-list">
+        <div class="novice-detail-item">
+          <span class="novice-detail-tag">자격요건</span>
+          <div class="novice-detail-desc">
+            해외 체류기간, 학력사항(해외학교 재학 이력), 부모 동반 여부 등 재외국민 자격요건을 확인할 수 있습니다.<br>
+            국가별·학교별 인정 기준, 동반자 요건 등의 정보도 함께 확인할 수 있습니다.
+          </div>
+        </div>
+        <div class="novice-detail-item">
+          <span class="novice-detail-tag">대학정보</span>
+          <div class="novice-detail-desc">
+            대학에서 직접 입력한 대학의 전년도 입시결과, 재외국민 전형 모집요강, 등록금, 장학금, 대학 특징, 교육여건 등의 정보를 확인할 수 있습니다.
+          </div>
+        </div>
+        <div class="novice-detail-item">
+          <span class="novice-detail-tag">학과정보</span>
+          <div class="novice-detail-desc">
+            교육목표, 교육과정, 진로·취업분야, 등록금, 취업률, 경쟁률 등 학생들이 궁금해 하는 학과의 주요정보를 확인할 수 있습니다.
+          </div>
+        </div>
+        <div class="novice-detail-item">
+          <span class="novice-detail-tag">전형정보</span>
+          <div class="novice-detail-desc">
+            재외국민 특별전형 일정·방법, 그리고 어떤 기준으로 학생을 선발하는지, 어렵게만 느껴졌던 전형에 대한 정보를 한눈에 확인할 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openNoviceGuide() {
+  document.getElementById('noviceModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeNoviceGuide() {
+  document.getElementById('noviceModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 </script>
 
