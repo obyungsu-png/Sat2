@@ -382,6 +382,82 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 .login-links a:last-child { border-right: none; }
 .login-links a:hover { color: #2db4a8; }
 
+/* 로그인 후 상태 UI */
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.profile-row:hover { background: #fafafa; }
+.profile-badge {
+  background: #2db4a8;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.profile-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #222;
+  flex: 1;
+}
+.profile-arrow {
+  color: #bbb;
+  font-size: 14px;
+}
+.quick-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 8px 4px 12px;
+}
+.quick-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 4px;
+  cursor: pointer;
+  border-right: 1px solid #f0f0f0;
+  transition: background 0.15s;
+  position: relative;
+}
+.quick-item:nth-child(3n) { border-right: none; }
+.quick-item:nth-child(-n+3) { border-bottom: 1px solid #f0f0f0; }
+.quick-item i {
+  font-size: 22px;
+  color: #555;
+}
+.quick-item span {
+  font-size: 12px;
+  color: #555;
+  font-weight: 500;
+}
+.quick-item:hover { background: #f5fffe; }
+.quick-item:hover i,
+.quick-item:hover span { color: #2db4a8; }
+.quick-item.active i,
+.quick-item.active span { color: #2db4a8; font-weight: 700; }
+.logout-btn {
+  width: calc(100% - 30px);
+  margin: 6px 15px 18px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.logout-btn:hover { border-color: #2db4a8; color: #2db4a8; }
+
 /* ===== STEP SECTION ===== */
 .section-row {
   display: flex;
@@ -1279,13 +1355,52 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
     </div>
 
     <div class="login-sidebar">
-      <div class="login-greeting">만나서 반가워요!</div>
-      <div class="login-avatar"><i class="fas fa-user"></i></div>
-      <button class="login-btn" onclick="openPage('loginOverlay')">로그인</button>
-      <div class="login-links">
-        <a href="#">아이디찾기</a>
-        <a href="#">비밀번호 찾기</a>
-        <a href="#">회원가입</a>
+      <!-- 로그인 전 상태 -->
+      <div id="loginBeforeBox" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div class="login-greeting">만나서 반가워요!</div>
+        <div class="login-avatar"><i class="fas fa-user"></i></div>
+        <button class="login-btn" onclick="openPage('loginOverlay')">로그인</button>
+        <div class="login-links">
+          <a href="#">아이디찾기</a>
+          <a href="#">비밀번호 찾기</a>
+          <a href="#">회원가입</a>
+        </div>
+      </div>
+
+      <!-- 로그인 후 상태 -->
+      <div id="loginAfterBox" style="display:none;width:100%;">
+        <div class="profile-row" onclick="openPage('loginOverlay')">
+          <span class="profile-badge">학부모</span>
+          <span class="profile-name">오병수</span>
+          <i class="fas fa-chevron-right profile-arrow"></i>
+        </div>
+        <div class="quick-menu">
+          <div class="quick-item" onclick="openPage('admOverlay')">
+            <i class="fas fa-file-alt"></i>
+            <span>관심전형</span>
+          </div>
+          <div class="quick-item" onclick="openPage('univOverlay')">
+            <i class="fas fa-graduation-cap"></i>
+            <span>관심대학</span>
+          </div>
+          <div class="quick-item" onclick="openPage('jobOverlay')">
+            <i class="fas fa-search"></i>
+            <span>관심진로</span>
+          </div>
+          <div class="quick-item active" onclick="openPage('consultOverlay')">
+            <i class="fas fa-headset"></i>
+            <span>상담내역</span>
+          </div>
+          <div class="quick-item" onclick="openPage('gradeOverlay')">
+            <i class="fas fa-clipboard-check"></i>
+            <span>신청/접수</span>
+          </div>
+          <div class="quick-item">
+            <i class="fas fa-calendar-check"></i>
+            <span>나의일정</span>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logoutUser()">로그아웃</button>
       </div>
     </div>
   </div>
@@ -2847,7 +2962,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         <span class="field-icon"><i class="fas fa-shield-alt"></i></span>
       </div>
       <br>
-      <button class="login-submit">로그인하기</button>
+      <button class="login-submit" onclick="loginUser()">로그인하기</button>
       <div class="login-options">
         <label><input type="checkbox" checked> 아이디 저장</label>
         <a href="#">아이디 찾기</a>
@@ -4350,6 +4465,17 @@ function closeJobModal() { showHome(); }
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape'){ showHome(); closeMenu(); }
 });
+
+/* ====== 로그인/로그아웃 ====== */
+function loginUser() {
+  document.getElementById('loginBeforeBox').style.display = 'none';
+  document.getElementById('loginAfterBox').style.display = 'block';
+  showHome();
+}
+function logoutUser() {
+  document.getElementById('loginAfterBox').style.display = 'none';
+  document.getElementById('loginBeforeBox').style.display = 'flex';
+}
 
 /* ====== 배너 슬라이더 ====== */
 let currentSlide = 0;
