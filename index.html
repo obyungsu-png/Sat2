@@ -138,18 +138,44 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 }
 .banner-slider {
   flex: 1;
-  background: linear-gradient(135deg, #e8f5e9 0%, #fff9c4 50%, #e0f2f1 100%);
   border-radius: 16px;
   overflow: hidden;
   position: relative;
   min-height: 300px;
-  display: flex;
-  align-items: center;
-  padding: 40px 50px;
 }
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  padding: 40px 60px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.banner-slide.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Slide 1 - 대학입학정보박람회 (파란색) */
+.slide-1 { background: linear-gradient(135deg, #64b5f6 0%, #90caf9 100%); }
+/* Slide 2 - 서비스 가이드 (밝은 파란) */
+.slide-2 { background: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%); }
+/* Slide 3 - 차세대 포털 (노란) */
+.slide-3 { background: linear-gradient(135deg, #fff59d 0%, #fff9c4 100%); }
+/* Slide 4 - 유튜브 채널 (연한 노란) */
+.slide-4 { background: linear-gradient(135deg, #fff9c4 0%, #fffde7 100%); }
+/* Slide 5 - 용어사전 (밤하늘) */
+.slide-5 { background: linear-gradient(135deg, #1a237e 0%, #311b92 100%); }
+/* Slide 6 - 알리미 (밝은 회색) */
+.slide-6 { background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%); }
+/* Slide 7 - 기숙사 (보라) */
+.slide-7 { background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%); }
+
 .banner-content {
   position: relative;
   z-index: 2;
+  max-width: 60%;
 }
 .banner-tag {
   display: inline-block;
@@ -162,22 +188,20 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   margin-bottom: 14px;
 }
 .banner-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
-  color: #1a5c3a;
   line-height: 1.3;
   margin-bottom: 10px;
 }
 .banner-title em {
   font-style: normal;
-  color: #2db4a8;
-  font-size: 38px;
+  font-size: 34px;
   display: block;
 }
 .banner-desc {
-  font-size: 15px;
-  color: #555;
+  font-size: 14px;
   line-height: 1.6;
+  margin-top: 8px;
 }
 .banner-btns {
   display: flex;
@@ -188,45 +212,74 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   border: none;
   font-family: 'Noto Sans KR', sans-serif;
 }
-.banner-btn.primary { background: #f44336; color: #fff; }
-.banner-btn.secondary { background: #ff9800; color: #fff; }
+
+/* Slide-specific text colors */
+.slide-1 .banner-title { color: #fff9c4; text-shadow: 2px 2px 0 #1976d2; }
+.slide-1 .banner-title em { color: #fff; text-shadow: 2px 2px 0 #1976d2; }
+.slide-1 .banner-desc { color: #fff; font-weight: 600; }
+.slide-1 .banner-desc strong { color: #ffeb3b; }
+
+.slide-2 .banner-title { color: #1565c0; }
+.slide-2 .banner-title em { color: #2196f3; }
+.slide-2 .banner-desc { color: #555; }
+
+.slide-3 .banner-title { color: #424242; -webkit-text-stroke: 1px #fff; text-shadow: 3px 3px 0 rgba(0,0,0,0.1); }
+.slide-3 .banner-desc { color: #5d4037; font-weight: 600; }
+.slide-3 .feature-row { display: flex; gap: 14px; margin-top: 16px; }
+.slide-3 .feature-card { background: #fff; border-radius: 10px; padding: 14px 16px; flex: 1; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.slide-3 .feature-icon { font-size: 24px; margin-bottom: 6px; }
+.slide-3 .feature-title { font-size: 12px; font-weight: 700; color: #2db4a8; }
+.slide-3 .feature-desc { font-size: 11px; color: #666; margin-top: 2px; }
+
+.slide-4 .banner-title { color: #9e9e9e; }
+.slide-4 .banner-title em { color: #43a047; font-size: 38px; }
+.slide-4 .banner-desc { color: #555; }
+.slide-4 .pill-row { display: flex; gap: 8px; margin: 12px 0; }
+.slide-4 .pill { background: #43a047; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; }
+
+.slide-5 .banner-title { color: #66ff66; text-shadow: 0 0 20px rgba(102,255,102,0.4); }
+.slide-5 .banner-title em { color: #ffeb3b; font-size: 32px; text-shadow: 0 0 20px rgba(255,235,59,0.4); }
+.slide-5 .banner-desc { color: #b3e5fc; }
+
+.slide-6 .banner-title { color: #333; }
+.slide-6 .banner-title em { color: #e91e63; font-size: 36px; -webkit-text-stroke: 1px #fff; }
+.slide-6 .banner-desc { color: #666; font-style: italic; font-size: 13px; }
+
+.slide-7 .banner-title { color: #222; font-size: 30px; }
+.slide-7 .banner-desc { color: #555; }
+.slide-7 .app-badges { display: flex; gap: 8px; margin-top: 14px; align-items: center; }
+.slide-7 .app-badge { background: #000; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 11px; display: inline-flex; align-items: center; gap: 6px; }
+.slide-7 .app-badge i { font-size: 16px; }
+
 .banner-illustration {
   position: absolute;
-  right: 30px;
-  bottom: 0;
-  width: 300px;
-  height: 280px;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 240px;
+  height: 220px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
-.illust-plane {
-  font-size: 120px;
-  opacity: 0.15;
-  color: #2db4a8;
-  transform: rotate(-15deg);
+.banner-illustration i.main-icon {
+  font-size: 130px;
+  opacity: 0.35;
 }
-.illust-globe {
-  font-size: 80px;
-  opacity: 0.2;
-  color: #ff9800;
-  position: absolute;
-  right: 20px;
-  top: 40px;
-}
-.illust-passport {
-  font-size: 70px;
-  opacity: 0.18;
-  color: #1a5c3a;
-  position: absolute;
-  left: 10px;
-  top: 30px;
-}
+.slide-1 .banner-illustration i.main-icon { color: #fff; }
+.slide-2 .banner-illustration i.main-icon { color: #1976d2; }
+.slide-3 .banner-illustration i.main-icon { color: #ff9800; opacity: 0.3; }
+.slide-4 .banner-illustration i.main-icon { color: #f44336; opacity: 0.6; }
+.slide-5 .banner-illustration i.main-icon { color: #ffeb3b; opacity: 0.6; }
+.slide-6 .banner-illustration i.main-icon { color: #e91e63; opacity: 0.4; }
+.slide-7 .banner-illustration i.main-icon { color: #ab47bc; opacity: 0.5; }
+
 .banner-dots {
   position: absolute;
   bottom: 16px;
@@ -235,35 +288,44 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   display: flex;
   gap: 6px;
   align-items: center;
+  z-index: 10;
 }
 .banner-dots .dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #ccc;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 .banner-dots .dot.active { background: #2db4a8; width: 20px; border-radius: 4px; }
 .banner-dots .counter {
   font-size: 12px;
-  color: #999;
+  color: #555;
   margin-left: 8px;
+  background: rgba(255,255,255,0.7);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 .banner-arrow {
   position: absolute;
-  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
   color: #666;
   cursor: pointer;
-  z-index: 3;
+  z-index: 11;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
+.banner-arrow.prev { left: 16px; }
+.banner-arrow.next { right: 16px; }
+.banner-arrow:hover { background: #fff; color: #2db4a8; }
 
 /* Login Sidebar */
 .login-sidebar {
@@ -1077,34 +1139,142 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 
   <!-- BANNER ROW -->
   <div class="banner-row">
-    <div class="banner-slider">
-      <div class="banner-content">
-        <span class="banner-tag">2027학년도 재외국민 특별전형</span>
-        <div class="banner-title">
-          재외국민 입시의 모든 것
-          <em>재외국민 전형 TV</em>
+    <div class="banner-slider" id="bannerSlider">
+
+      <!-- Slide 1: 대학입학정보박람회 -->
+      <div class="banner-slide slide-1 active">
+        <div class="banner-content">
+          <div class="banner-title">
+            2027학년도 재외국민
+            <em>입학정보박람회</em>
+          </div>
+          <div class="banner-desc">
+            <strong>2026. 8. 20.(목) ~ 22.(토)</strong> 매일 10:00 ~ 17:00 코엑스 3층 D홀<br>
+            신청기간 : 2026. 7. 15.(수) 09:00 ~ 8. 14.(금) 18:00<br>
+            신청방법 : 재외국민 One Stop 서비스 홈페이지 선착순 접수<br>
+            대입정보센터 ▶ 박람회/설명회 ▶ 1:1 상담관
+          </div>
         </div>
-        <div class="banner-desc">구독! 좋아요! 설정하고 새로운 영상들을 먼저 만나보세요~!</div>
-        <div class="banner-btns">
-          <button class="banner-btn primary">구독!</button>
-          <button class="banner-btn secondary">좋아요!</button>
+        <div class="banner-illustration"><i class="fas fa-bullhorn main-icon"></i></div>
+      </div>
+
+      <!-- Slide 2: 서비스 가이드 -->
+      <div class="banner-slide slide-2">
+        <div class="banner-content">
+          <div class="banner-title">
+            재외국민 표준 공통원서접수
+            <em>서비스 가이드!</em>
+          </div>
+          <div class="banner-desc">
+            한 번의 가입으로 여러 대학에 원서접수가 가능합니다.<br>
+            지원 절차와 필요서류를 쉽게 안내해 드립니다.
+          </div>
+          <div class="banner-btns">
+            <button class="banner-btn" style="background:#2196f3;color:#fff;">가이드 보기 ›</button>
+          </div>
         </div>
+        <div class="banner-illustration"><i class="fas fa-book-open main-icon"></i></div>
       </div>
-      <div class="banner-illustration">
-        <i class="fas fa-plane illust-plane"></i>
-        <i class="fas fa-globe-americas illust-globe"></i>
-        <i class="fas fa-passport illust-passport"></i>
+
+      <!-- Slide 3: 차세대 포털 -->
+      <div class="banner-slide slide-3">
+        <div class="banner-content">
+          <div class="banner-title">
+            새로워진 차세대 재외국민 포털!
+          </div>
+          <div class="feature-row">
+            <div class="feature-card">
+              <div class="feature-icon">🗺️</div>
+              <div class="feature-title">국가별 검색</div>
+              <div class="feature-desc">서비스 제공</div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📄</div>
+              <div class="feature-title">사진 및 파일로</div>
+              <div class="feature-desc">서류 입력 간편</div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">💻</div>
+              <div class="feature-title">UI/UX 개선</div>
+              <div class="feature-desc">사용 편의성 강화</div>
+            </div>
+          </div>
+        </div>
+        <div class="banner-illustration"><i class="fas fa-rocket main-icon"></i></div>
       </div>
-      <div class="banner-arrow"><i class="fas fa-chevron-right"></i></div>
+
+      <!-- Slide 4: 유튜브 채널 -->
+      <div class="banner-slide slide-4">
+        <div class="banner-content">
+          <div class="banner-title">
+            재외국민 One Stop 유튜브 채널
+            <em>재외국민 전형 TV</em>
+          </div>
+          <div class="pill-row">
+            <span class="pill">구독!</span>
+            <span class="pill" style="background:#fbc02d;">좋아요!</span>
+          </div>
+          <div class="banner-desc">설정하고 새로운 영상들을 먼저 만나보세요~!</div>
+        </div>
+        <div class="banner-illustration"><i class="fab fa-youtube main-icon"></i></div>
+      </div>
+
+      <!-- Slide 5: 용어사전 -->
+      <div class="banner-slide slide-5">
+        <div class="banner-content">
+          <div class="banner-title">
+            알아두면 쓸데있는
+            <em>재외국민 용어사전</em>
+          </div>
+          <div class="banner-desc">
+            아는만큼 보인다!<br>
+            복잡하고 헷갈렸던 재외국민 입시 용어를 한번에 확인하세요
+          </div>
+        </div>
+        <div class="banner-illustration"><i class="fas fa-star main-icon"></i></div>
+      </div>
+
+      <!-- Slide 6: 알리미 -->
+      <div class="banner-slide slide-6">
+        <div class="banner-content">
+          <div class="banner-title">
+            <span style="font-size:18px;color:#888;display:block;font-weight:500;">대학정보를 보다, 미래를 보다</span>
+            대학정보가 필요할때 <em>재외국민 알리미</em>
+          </div>
+          <div class="banner-desc">전국 대학의 재외국민 전형 정보를 한눈에 확인하세요.</div>
+        </div>
+        <div class="banner-illustration"><i class="fas fa-university main-icon"></i></div>
+      </div>
+
+      <!-- Slide 7: 기숙사 -->
+      <div class="banner-slide slide-7">
+        <div class="banner-content">
+          <div class="banner-title">
+            기숙사 선택,<br>이제 쉽고 빠르게
+          </div>
+          <div class="banner-desc">
+            검색부터 비교, 선택까지 한 번에<br>
+            재외국민 학생들을 위한 기숙사 정보 플랫폼
+          </div>
+          <div class="app-badges">
+            <span class="app-badge"><i class="fab fa-google-play"></i> Google Play</span>
+            <span class="app-badge"><i class="fab fa-apple"></i> App Store</span>
+          </div>
+        </div>
+        <div class="banner-illustration"><i class="fas fa-building main-icon"></i></div>
+      </div>
+
+      <div class="banner-arrow prev" onclick="bannerPrev()"><i class="fas fa-chevron-left"></i></div>
+      <div class="banner-arrow next" onclick="bannerNext()"><i class="fas fa-chevron-right"></i></div>
       <div class="banner-dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="counter">‖ 4/7</span>
+        <span class="dot active" onclick="bannerGo(0)"></span>
+        <span class="dot" onclick="bannerGo(1)"></span>
+        <span class="dot" onclick="bannerGo(2)"></span>
+        <span class="dot" onclick="bannerGo(3)"></span>
+        <span class="dot" onclick="bannerGo(4)"></span>
+        <span class="dot" onclick="bannerGo(5)"></span>
+        <span class="dot" onclick="bannerGo(6)"></span>
+        <span class="counter" id="bannerCounter">‖ 1/7</span>
       </div>
     </div>
 
@@ -4180,6 +4350,38 @@ function closeJobModal() { showHome(); }
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape'){ showHome(); closeMenu(); }
 });
+
+/* ====== 배너 슬라이더 ====== */
+let currentSlide = 0;
+const totalSlides = 7;
+let slideInterval;
+
+function bannerGo(idx) {
+  currentSlide = idx;
+  document.querySelectorAll('.banner-slide').forEach((s,i) => {
+    s.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.banner-dots .dot').forEach((d,i) => {
+    d.classList.toggle('active', i === idx);
+  });
+  document.getElementById('bannerCounter').textContent = `‖ ${idx+1}/${totalSlides}`;
+  resetSlideTimer();
+}
+
+function bannerNext() {
+  bannerGo((currentSlide + 1) % totalSlides);
+}
+
+function bannerPrev() {
+  bannerGo((currentSlide - 1 + totalSlides) % totalSlides);
+}
+
+function resetSlideTimer() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(bannerNext, 5000);
+}
+
+resetSlideTimer();
 </script>
 
 </body>
